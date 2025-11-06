@@ -326,42 +326,53 @@ class QueryExplainer:
 
     def _create_visual_diagram(self, query: str) -> str:
         """Create an ASCII diagram of the query pattern."""
-        # Extract nodes
-        node_pattern = r'\((\w+):(\w+)\)'
-        nodes = re.findall(node_pattern, query)
+        # Extract the full pattern preserving structure
+        match_pattern = re.search(r'MATCH\s+(.*?)(?=WHERE|RETURN|MATCH|$)', query, re.IGNORECASE | re.DOTALL)
+        if not match_pattern:
+            return "No pattern to visualize"
         
-        # Extract relationships
-        rel_pattern = r'-\[(\w*):?(\w*)\]-[>]?'
-        rels = re.findall(rel_pattern, query)
+        pattern = match_pattern.group(1).strip()
+        
+        # Extract nodes with labels
+        node_pattern = r'\((\w+):(\w+)(?:\{[^}]*\})?\)'
+        nodes = re.findall(node_pattern, pattern)
         
         if not nodes:
             return "No pattern to visualize"
         
-        # Build simple diagram
+        # Single node case
         if len(nodes) == 1:
-            var, label = nodes[0]
-            return f"({label})"
+            return f"({nodes[0][1]})"
         
-        if len(nodes) >= 2 and rels:
-            var1, label1 = nodes[0]
-            var2, label2 = nodes[1]
-            rel_type = rels[0][1] if rels[0][1] else "RELATED"
+        # Build diagram by parsing the pattern structure
+        diagram_parts = []
+        remaining = pattern
+        
+        for i, (var, label) in enumerate(nodes):
+            diagram_parts.append(f"({label})")
             
-            # Check direction
-            if "->" in query:
-                return f"({label1}) --[{rel_type}]--> ({label2})"
-            elif "<-" in query:
-                return f"({label1}) <--[{rel_type}]-- ({label2})"
-            else:
-                return f"({label1}) --[{rel_type}]-- ({label2})"
+            # Find relationship between this node and next
+            if i < len(nodes) - 1:
+                next_var = nodes[i + 1][0]
+                # Look for relationship pattern between current and next node
+                rel_search = re.search(
+                    rf'\({var}[^)]*\)\s*(<)?-\[(\w*):?(\w*)[^\]]*\]-(>)?\s*\({next_var}',
+                    pattern
+                )
+                
+                if rel_search:
+                    left_arrow, rel_var, rel_type, right_arrow = rel_search.groups()
+                    rel_label = rel_type if rel_type else "RELATED"
+                    
+                    # Determine direction
+                    if left_arrow and not right_arrow:
+                        diagram_parts.append(f" <--[{rel_label}]-- ")
+                    elif right_arrow and not left_arrow:
+                        diagram_parts.append(f" --[{rel_label}]--> ")
+                    else:
+                        diagram_parts.append(f" --[{rel_label}]-- ")
         
-        # Multi-node diagram
-        diagram = f"({nodes[0][1]})"
-        for i in range(1, len(nodes)):
-            rel_type = rels[i-1][1] if i-1 < len(rels) and rels[i-1][1] else "?"
-            diagram += f" --[{rel_type}]--> ({nodes[i][1]})"
-        
-        return diagram
+        return "".join(diagram_parts)
 
     def _estimate_result_size(self, query: str) -> Dict[str, str]:
         """Estimate the potential result size."""
