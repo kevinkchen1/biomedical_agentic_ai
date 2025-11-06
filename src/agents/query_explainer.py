@@ -232,7 +232,10 @@ class QueryExplainer:
             if "count(" in items[0].lower():
                 return "Count the total number of results"
             elif "distinct" in items[0].lower():
-                return f"Return unique values of {items[0].replace('DISTINCT', '').strip()}"
+                var_name = items[0].replace('DISTINCT', '').replace('distinct', '').strip()
+                return f"Return unique values of {var_name}"
+            elif "collect(" in items[0].lower():
+                return "Aggregate results into a list"
             else:
                 return f"Return the property: {items[0]}"
         else:
