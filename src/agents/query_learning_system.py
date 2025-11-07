@@ -146,6 +146,9 @@ class QueryLearningSystem:
         was_helpful: bool = True,
     ):
         """Record user feedback for a query execution."""
+        if not 1 <= rating <= 5:
+            raise ValueError("Rating must be between 1 and 5")
+        
         conn = sqlite3.connect(self.db_path)
         cursor = conn.cursor()
 
@@ -216,12 +219,12 @@ class QueryLearningSystem:
 
     def _extract_pattern_template(self, cypher_query: str) -> str:
         """Convert specific query to reusable pattern template."""
+        import re
+        
         # Simple pattern extraction - replace specific values with placeholders
         pattern = cypher_query
 
         # Replace string literals with {VALUE}
-        import re
-
         pattern = re.sub(r"'[^']*'", "{VALUE}", pattern)
         pattern = re.sub(r'"[^"]*"', "{VALUE}", pattern)
 
