@@ -106,37 +106,39 @@ class QueryLearningSystem:
     ) -> int:
         """Log a query execution and return the execution ID."""
         conn = sqlite3.connect(self.db_path)
-        cursor = conn.cursor()
+        try:
+            cursor = conn.cursor()
 
-        cursor.execute(
-            """
-            INSERT INTO query_executions 
-            (timestamp, user_question, question_type, entities, cypher_query,
-             execution_success, results_count, execution_time_ms, error_message)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """,
-            (
-                datetime.now().isoformat(),
-                user_question,
-                question_type,
-                json.dumps(entities),
-                cypher_query,
-                execution_success,
-                results_count,
-                execution_time_ms,
-                error_message,
-            ),
-        )
+            cursor.execute(
+                """
+                INSERT INTO query_executions 
+                (timestamp, user_question, question_type, entities, cypher_query,
+                 execution_success, results_count, execution_time_ms, error_message)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+                (
+                    datetime.now().isoformat(),
+                    user_question,
+                    question_type,
+                    json.dumps(entities),
+                    cypher_query,
+                    execution_success,
+                    results_count,
+                    execution_time_ms,
+                    error_message,
+                ),
+            )
 
-        execution_id = cursor.lastrowid
-        conn.commit()
-        conn.close()
+            execution_id = cursor.lastrowid
+            conn.commit()
 
-        # Update query patterns if successful
-        if execution_success and results_count > 0:
-            self._update_query_pattern(question_type, cypher_query)
+            # Update query patterns if successful
+            if execution_success and results_count > 0:
+                self._update_query_pattern(question_type, cypher_query)
 
-        return execution_id
+            return execution_id
+        finally:
+            conn.close()
 
     def add_user_feedback(
         self,
