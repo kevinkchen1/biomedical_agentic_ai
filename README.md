@@ -99,3 +99,6 @@ pdm run lint            # Check quality
 - **"Which genes are linked to multiple disease categories?"**
 - **"What proteins have causal associations with diseases?"** 
 
+## Helix Navigator Project Further Improvements
+
+For this, there are two main improvements: A query learning system for the agent that scores user queries and suggests new ones based on previous activity, and a cypher query explainer that would improve the user experience when using the application. When working on the query learning system, I wanted to create a system that can store successful queries and user feedback to build a "query library" that improves over time with user actions, input and feedback. I found this part interesting because I wanted this query learning system to give new query recommendations based on the user's activity and previous questions. This required me to learn more about how to train the model to identify queries similar to one another to recommend them. Working on this part of the task was very interesting and I was able to find training methods to teach the model to recommend accurate results.
