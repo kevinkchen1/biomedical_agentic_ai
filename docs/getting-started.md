@@ -27,7 +27,7 @@ AI systems that combine:
 
 ### 1. Setup Project
 ```bash
-git clone https://github.com/your-org/hdsi_replication_proj_2025.git
+git clone https://github.com/kevinkchen1/biomedical_agentic_ai.git
 cd hdsi_replication_proj_2025
 pdm install
 cp .env.example .env
