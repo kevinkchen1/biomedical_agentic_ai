@@ -36,6 +36,7 @@ The Helix Navigator is a project focused on building AI systems using biomedical
 ## Installation
 
 **Quick Setup**: Python 3.10+, Neo4j, PDM
+
 NOTE: this is a simple brief overview of the commands and steps. For full detailed instructions on how to install dependencies and setup the environment at [Getting Started](docs/getting-started.md).
 
 ```bash
