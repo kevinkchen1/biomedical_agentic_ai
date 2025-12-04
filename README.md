@@ -2,12 +2,15 @@
 
 **Learn LangGraph and Knowledge Graphs through Biomedical AI**
 
-An interactive educational project that teaches modern AI development through hands-on biomedical applications. Build AI agents that answer complex questions about genes, proteins, diseases, and drugs using graph databases and multi-step AI workflows.
+An interactive educational project that teaches modern AI development through hands-on biomedical applications. 
+### *A Practical Introduction to LangGraph, Knowledge Graphs, and Biomedical AI*
+
+Helix Navigator is an educational project designed to help you build AI systems using biomedical datasets, multi-step AI agents, and knowledge-graph-based reasoning. Build AI agents that answer complex questions about genes, proteins, diseases, and drugs using graph databases and multi-step AI workflows.
 
 *Navigate: [Getting Started](docs/getting-started.md) | [Foundations Guide](docs/foundations-and-background.md) | [Reference](docs/reference.md) | [Technical Guide](docs/technical-guide.md)*
 
 
-## What You'll Learn
+## Key Concepts in Helix Navigator
 
 - **Knowledge Graphs**: Represent domain knowledge as nodes and relationships
 - **LangGraph**: Build multi-step AI workflows with state management  
@@ -104,3 +107,29 @@ pdm run lint            # Check quality
 For this, there are two main improvements: A query learning system for the agent that scores user queries and suggests new ones based on previous activity, and a cypher query explainer that would improve the user experience when using the application. When working on the query learning system, I wanted to create a system that can store successful queries and user feedback to build a "query library" that improves over time with user actions, input and feedback. I found this part interesting because I wanted this query learning system to give new query recommendations based on the user's activity and previous questions. This required me to learn more about how to train the model to identify queries similar to one another to recommend them. Working on this part of the task was very interesting and I was able to find training methods to teach the model to recommend accurate results.
 
 The Query Learning System with a feedback loop was chosen due to the many benefits and improvements it would bring to the project. These include having a persistent storage for queries, results and feedback, in addition to user analytics to track queries that are effective and working well. These are on top the main reason this tool was added to the project, which was to improve the user experience and quality of suggested queries.
+
+## Modifications Made
+
+My version of the Helix Navigator introduces two additional modules to support interactive learning and query understanding. Both of these files were completely created by me and were not present in the original version:
+
+### ✔ `src/agents/query_explainer.py`
+A helper module that explains the structure and meaning of Cypher queries. It breaks down clauses, describes data flow, and makes graph queries more interpretable.
+
+### ✔ `src/agents/query_learning_system.py`
+An interactive query-building and feedback system designed to teach users how to construct, debug, and refine Cypher queries.
+
+These files integrate with the existing agent workflow and expand the educational scope of the project.
+
+---
+
+## Prerequisites
+
+Before running the code, ensure you have:
+
+### ✔ Python **3.10+**
+### ✔ A running Neo4j instance  
+Local Neo4j Desktop or cloud-hosted Neo4j AuraDB.
+
+### ✔ PDM (Python dependency manager)  
+Install with:
+pip install pdm
