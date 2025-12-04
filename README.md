@@ -1,11 +1,8 @@
 # Helix Navigator
 
-**Learn LangGraph and Knowledge Graphs through Biomedical AI**
-
-An interactive educational project that teaches modern AI development through hands-on biomedical applications. 
 ### *A Practical Introduction to LangGraph, Knowledge Graphs, and Biomedical AI*
 
-Helix Navigator is an educational project designed to help you build AI systems using biomedical datasets, multi-step AI agents, and knowledge-graph-based reasoning. Build AI agents that answer complex questions about genes, proteins, diseases, and drugs using graph databases and multi-step AI workflows.
+The Helix Navigator is a project focused on building AI systems using biomedical datasets, multi-step AI agents, and knowledge-graph-based reasoning. The goal is to build AI agents that answer complex questions about genes, proteins, diseases, and drugs using graph databases and multi-step AI workflows.
 
 *Navigate: [Getting Started](docs/getting-started.md) | [Foundations Guide](docs/foundations-and-background.md) | [Reference](docs/reference.md) | [Technical Guide](docs/technical-guide.md)*
 
@@ -20,18 +17,21 @@ Helix Navigator is an educational project designed to help you build AI systems 
 
 ## Quick Start
 
-1. **New to these concepts?** Read the [Foundations Guide](docs/foundations-and-background.md)
-2. **Setup**: Follow [Getting Started](docs/getting-started.md) for installation
-3. **Learn**: Use the interactive Streamlit web interface
-4. **Practice**: Work through the exercises in the web app
+1. **Start with the basics:** Review the [Foundations Guide](docs/foundations-and-background.md) if you're new to knowledge graphs or LangGraph.  
+2. **Set up your environment:** Follow the installation steps in [Getting Started](docs/getting-started.md).  
+3. **Explore the tools:** Open the Streamlit interface to interact with the system directly.  
+4. **Apply what you learn:** Complete the exercises and guided tasks available in the web application.
+
+---
 
 ## Technology Stack
 
-- **LangGraph**: AI workflow orchestration
-- **Neo4j**: Graph database
-- **Anthropic Claude**: Language model
-- **Streamlit**: Interactive web interface
-- **LangGraph Studio**: Visual debugging
+- **LangGraph** — Framework for building structured, multi-step AI workflows  
+- **Neo4j** — Graph database powering all knowledge retrieval  
+- **Anthropic Claude** — Language model used for reasoning and natural language responses  
+- **Streamlit** — Interactive front-end interface  
+- **LangGraph Studio** — Visual debugging tool for understanding agent execution  
+
 
 ## Installation
 
@@ -63,6 +63,8 @@ pdm run app
 
 **Key Files**:
 - `src/agents/workflow_agent.py` - Main LangGraph agent
+- (new)`src/agents/query_explainer.py` — Explains Cypher queries and breaks down their components  
+- (new)`src/agents/query_learning_system.py` — Interactive system for practicing and improving Cypher query construction  
 - `src/web/app.py` - Interactive Streamlit interface
 - `docs/` - Complete documentation
 
@@ -94,19 +96,38 @@ pdm run lint            # Check quality
 
 ## Example Questions
 
+- **"Which approved drugs target specific proteins?"**
 - **"Which drugs have high efficacy for treating diseases?"**
 - **"Which approved drugs treat cardiovascular diseases?"**
 - **"Which genes encode proteins that are biomarkers for diseases?"**
-- **"What drugs target proteins with high confidence disease associations?"**
-- **"Which approved drugs target specific proteins?"**
 - **"Which genes are linked to multiple disease categories?"**
-- **"What proteins have causal associations with diseases?"** 
+- **"What proteins have causal associations with diseases?"**
+- **"What drugs target proteins with high confidence disease associations?"**
+
 
 ## Helix Navigator Project Further Improvements
 
-For this, there are two main improvements: A query learning system for the agent that scores user queries and suggests new ones based on previous activity, and a cypher query explainer that would improve the user experience when using the application. When working on the query learning system, I wanted to create a system that can store successful queries and user feedback to build a "query library" that improves over time with user actions, input and feedback. I found this part interesting because I wanted this query learning system to give new query recommendations based on the user's activity and previous questions. This required me to learn more about how to train the model to identify queries similar to one another to recommend them. Working on this part of the task was very interesting and I was able to find training methods to teach the model to recommend accurate results.
+There are two main improvements I've added in the files mentioned above (query_explainer.py, query_learning_system.py). A query learning system for the agent that scores user queries and suggests new ones based on previous activity, and a cypher query explainer that would improve the user experience when using the application. When working on the query learning system, I wanted to create a system that can store successful queries and user feedback to build a "query library" that improves over time with user actions, input and feedback. I found this part interesting because I wanted this query learning system to give new query recommendations based on the user's activity and previous questions. This required me to learn more about how to train the model to identify queries similar to one another to recommend them. Working on this part of the task was very interesting and I was able to find training methods to teach the model to recommend accurate results. These include having a persistent storage for queries, results and feedback, in addition to user analytics to track queries that are effective and working well.
 
-The Query Learning System with a feedback loop was chosen due to the many benefits and improvements it would bring to the project. These include having a persistent storage for queries, results and feedback, in addition to user analytics to track queries that are effective and working well. These are on top the main reason this tool was added to the project, which was to improve the user experience and quality of suggested queries.
+
+This module provides clear, high-level explanations of Cypher queries to help users understand graph database operations more intuitively.
+
+#### What It Does
+- Summarizes what a query is doing in plain language  
+- Breaks queries into major components (MATCH, WHERE, RETURN, etc.)  
+- Highlights potential issues or inefficiencies  
+- Provides simple text-based diagrams of graph patterns  
+- Estimates query complexity and expected result size
+
+#### Why It Exists
+`query_explainer.py` supports learning, debugging, and teaching Cypher by turning complex queries into readable, structured explanations.
+
+#### Example Capabilities
+- Identify nodes, relationships, filters, and return items  
+- Flag missing `LIMIT` or overly broad patterns  
+- Produce short natural-language descriptions of query logic  
+
+This file powers educational features in the web app and improves transparency around how graph queries work.
 
 ## Modifications Made
 
@@ -120,16 +141,3 @@ An interactive query-building and feedback system designed to teach users how to
 
 These files integrate with the existing agent workflow and expand the educational scope of the project.
 
----
-
-## Prerequisites
-
-Before running the code, ensure you have:
-
-### ✔ Python **3.10+**
-### ✔ A running Neo4j instance  
-Local Neo4j Desktop or cloud-hosted Neo4j AuraDB.
-
-### ✔ PDM (Python dependency manager)  
-Install with:
-pip install pdm
