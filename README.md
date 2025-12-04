@@ -105,12 +105,12 @@ pdm run lint            # Check quality
 - **"What drugs target proteins with high confidence disease associations?"**
 
 
-## Helix Navigator Project Further Improvements
+## Helix Navigator Project Additional Improvements Overview
 
 There are two main improvements I've added in the files mentioned above (query_explainer.py, query_learning_system.py). A query learning system for the agent that scores user queries and suggests new ones based on previous activity, and a cypher query explainer that would improve the user experience when using the application. When working on the query learning system, I wanted to create a system that can store successful queries and user feedback to build a "query library" that improves over time with user actions, input and feedback. I found this part interesting because I wanted this query learning system to give new query recommendations based on the user's activity and previous questions. This required me to learn more about how to train the model to identify queries similar to one another to recommend them. Working on this part of the task was very interesting and I was able to find training methods to teach the model to recommend accurate results. These include having a persistent storage for queries, results and feedback, in addition to user analytics to track queries that are effective and working well.
 
 
-This module provides clear, high-level explanations of Cypher queries to help users understand graph database operations more intuitively.
+### 1. This Query explainer feature provides clear, high-level explanations of Cypher queries to help users understand graph database operations more intuitively.
 
 #### What It Does
 - Summarizes what a query is doing in plain language  
