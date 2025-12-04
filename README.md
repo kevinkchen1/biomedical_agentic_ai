@@ -110,7 +110,9 @@ pdm run lint            # Check quality
 There are two main improvements I've added in the files mentioned above (query_explainer.py, query_learning_system.py). A query learning system for the agent that scores user queries and suggests new ones based on previous activity, and a cypher query explainer that would improve the user experience when using the application. When working on the query learning system, I wanted to create a system that can store successful queries and user feedback to build a "query library" that improves over time with user actions, input and feedback. I found this part interesting because I wanted this query learning system to give new query recommendations based on the user's activity and previous questions. This required me to learn more about how to train the model to identify queries similar to one another to recommend them. Working on this part of the task was very interesting and I was able to find training methods to teach the model to recommend accurate results. These include having a persistent storage for queries, results and feedback, in addition to user analytics to track queries that are effective and working well.
 
 
-### 1. This Query explainer feature provides clear, high-level explanations of Cypher queries to help users understand graph database operations more intuitively.
+### 1. Query Explainer
+
+This feature provides clear, high-level explanations of Cypher queries to help users understand graph database operations more intuitively.
 
 #### What It Does
 - Summarizes what a query is doing in plain language  
@@ -127,7 +129,29 @@ There are two main improvements I've added in the files mentioned above (query_e
 - Flag missing `LIMIT` or overly broad patterns  
 - Produce short natural-language descriptions of query logic  
 
-This file powers educational features in the web app and improves transparency around how graph queries work.
+This file allows educational features in the app and improves transparency around how graph queries work.
+
+### 2. Query Learning System
+
+This feature tracks query usage and feedback to help the system generate better Cypher queries over time.
+
+#### What It Does
+- Logs every query execution (success, errors, results)
+- Stores user ratings and feedback
+- Learns recurring successful query patterns
+- Suggests similar past queries to users
+- Provides confidence scores for new queries
+- Generates basic analytics on performance and improvement
+
+#### Why It's Useful
+It gives the system a simple “memory,” allowing queries to improve based on what has worked well for users in the past.
+
+#### Core Features
+- Query history database  
+- Pattern extraction and scoring  
+- User feedback integration  
+- Similar-query recommendations  
+- Lightweight analytics (success rate, ratings, trends)
 
 ## Modifications Made
 
@@ -140,4 +164,5 @@ A helper module that explains the structure and meaning of Cypher queries. It br
 An interactive query-building and feedback system designed to teach users how to construct, debug, and refine Cypher queries.
 
 These files integrate with the existing agent workflow and expand the educational scope of the project.
+
 
