@@ -65,8 +65,8 @@ pdm run app
 
 **Key Files**:
 - `src/agents/workflow_agent.py` - Main LangGraph agent
-- (new)`src/agents/query_explainer.py` — Explains Cypher queries and breaks down their components  
-- (new)`src/agents/query_learning_system.py` — Interactive system for practicing and improving Cypher query construction  
+- `src/agents/query_explainer.py`(new) — Explains Cypher queries and breaks down their components  
+- `src/agents/query_learning_system.py`(new) — Interactive system for practicing and improving Cypher query construction  
 - `src/web/app.py` - Interactive Streamlit interface
 - `docs/` - Complete documentation
 
