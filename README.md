@@ -4,8 +4,15 @@ The Helix Navigator is a project focused on building AI systems using biomedical
 
 *Navigate: [Getting Started](docs/getting-started.md) | [Foundations Guide](docs/foundations-and-background.md) | [Reference](docs/reference.md) | [Technical Guide](docs/technical-guide.md)*
 
+## Quick Start
 
-## Key Concepts in Helix Navigator
+1. **Start with the basics:** Review the [Foundations Guide](docs/foundations-and-background.md) if you're new to knowledge graphs or LangGraph.  
+2. **Set up your environment:** Follow the installation steps in [Getting Started](docs/getting-started.md).  
+3. **Explore the tools:** Open the Streamlit interface to interact with the system directly.  
+4. **Apply what you learn:** Complete the exercises and guided tasks available in the web application.
+
+
+## Key Concepts
 
 - **Knowledge Graphs**: Represent domain knowledge as nodes and relationships
 - **LangGraph**: Build multi-step AI workflows with state management  
@@ -13,12 +20,6 @@ The Helix Navigator is a project focused on building AI systems using biomedical
 - **AI Integration**: Combine language models with structured knowledge
 - **Biomedical Applications**: Apply AI to drug discovery and personalized medicine
 
-## Quick Start
-
-1. **Start with the basics:** Review the [Foundations Guide](docs/foundations-and-background.md) if you're new to knowledge graphs or LangGraph.  
-2. **Set up your environment:** Follow the installation steps in [Getting Started](docs/getting-started.md).  
-3. **Explore the tools:** Open the Streamlit interface to interact with the system directly.  
-4. **Apply what you learn:** Complete the exercises and guided tasks available in the web application.
 
 ---
 
