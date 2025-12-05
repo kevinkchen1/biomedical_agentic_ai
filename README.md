@@ -1,7 +1,5 @@
 # Helix Navigator
 
-## A Practical Introduction to LangGraph, Knowledge Graphs, and Biomedical AI
-
 The Helix Navigator is a project focused on building AI systems using biomedical datasets, multi-step AI agents, and knowledge-graph-based reasoning. The goal is to build AI agents that answer complex questions about genes, proteins, diseases, and drugs using graph databases and multi-step AI workflows.
 
 *Navigate: [Getting Started](docs/getting-started.md) | [Foundations Guide](docs/foundations-and-background.md) | [Reference](docs/reference.md) | [Technical Guide](docs/technical-guide.md)*
