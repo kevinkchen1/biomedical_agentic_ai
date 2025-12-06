@@ -3,12 +3,23 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+"""
+    Query Learning System with Feedback Loop
 
+    This module implements a self-improving query system that learns from:
+    - Successful vs failed query executions
+    - User feedback on result quality
+    - Query patterns that produce good results
+    - Entity and question type correlations
+
+    The system builds a knowledge base of proven query patterns and uses it to:
+    - Suggest similar successful queries to users
+    - Improve query generation over time
+    - Provide confidence scores for generated queries
+    - Recommend related questions users might find useful
+"""
 class QueryLearningSystem:
-    """
-    Extremely lightweight version of the query learning system.
-    No database. JSON-based persistence. Simple heuristics.
-    """
+   
 
     def __init__(self, storage_path: str = "query_learning.json"):
         self.storage_path = Path(storage_path)
